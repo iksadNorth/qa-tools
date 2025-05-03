@@ -5,5 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "jinja2>=3.1.6",
     "selenium>=4.31.0",
+    "selenium-stealth>=1.0.6",
 ]
