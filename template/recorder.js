@@ -1,13 +1,18 @@
 (function() {
     var STORE_KEY = 'testtool_logs';
+    var MONITOR_KEY = 'testtool_monitor';
     console.log('recorder inject!');
 
     function getMonitoring() {
-        if(window.MONITOR_FLAG === undefined) window.MONITOR_FLAG = false;
-        return window.MONITOR_FLAG;
+        if(
+            window.localStorage.getItem(MONITOR_KEY) === undefined ||
+            window.localStorage.getItem(MONITOR_KEY) === null
+        ) window.localStorage.setItem(MONITOR_KEY, false);
+        boolString = window.localStorage.getItem(MONITOR_KEY);
+        return boolString === 'true';
     }
     function setMonitoring(flag) {
-        window.MONITOR_FLAG = flag;
+        window.localStorage.setItem(MONITOR_KEY, flag);
     }
   
     function getLog() {
