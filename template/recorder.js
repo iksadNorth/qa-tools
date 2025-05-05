@@ -37,9 +37,13 @@
         while (el.nodeType === Node.ELEMENT_NODE) {
             let selector = el.nodeName.toLowerCase();
             if (el.id) {
-                selector += '#' + el.id;
+                // id에 특수문자(예: '.')가 있으면 속성 선택자 방식 사용
+                const safeId = /^[a-zA-Z_][\w-]*$/.test(el.id)
+                    ? `#${el.id}`
+                    : `[id="${el.id}"]`;
+                selector += safeId;
                 path.unshift(selector);
-                break; // ID는 고유하므로 여기서 멈춤
+                break; // ID 기준으로 유니크하므로 중단
             } else {
                 let sib = el, nth = 1;
                 while ((sib = sib.previousElementSibling)) {
