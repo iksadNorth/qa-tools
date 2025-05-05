@@ -1,9 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium_stealth import stealth
+from src.singleton import Singleton
 
-class SeleniumDriverFactory:
-    def __init__(self, headless: bool = False):
+class SeleniumDriverFactory(Singleton):    
+    def _init_once(self, headless: bool = False):
+        self.driver = self.init_driver(headless=headless)
+    
+    def init_driver(self, headless):
         options = Options()
 
         options.add_argument(
@@ -24,17 +28,15 @@ class SeleniumDriverFactory:
         options.add_argument("--disable-gpu")
         options.add_argument("--window-size=1920,1080")
 
-        self.driver = webdriver.Chrome(options=options)
-
-        self.driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+        driver = webdriver.Chrome(options=options)
+        driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
             "source": """
                 Object.defineProperty(navigator, 'webdriver', {
                     get: () => undefined
                 });
             """
         })
-
-        stealth(self.driver,
+        stealth(driver,
             languages=["ko-KR", "ko"],
             vendor="Google Inc.",
             platform="Win32",
@@ -42,6 +44,8 @@ class SeleniumDriverFactory:
             renderer="Intel Iris OpenGL Engine",
             fix_hairline=True,
         )
+
+        return driver
 
     def get_driver(self):
         return self.driver

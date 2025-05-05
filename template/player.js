@@ -1,4 +1,6 @@
 (function() {
+    console.log('player inject!');
+
     function waitForElementAsync(selector) {
         return new Promise(resolve => {
             const existing = document.querySelector(selector);
@@ -18,7 +20,7 @@
         });
     }
     
-    window.run = async function(log) {
+    async function replay(log) {
         switch (log.type) {
             case 'click': {
                 const el = await waitForElementAsync(log.selector);
@@ -39,4 +41,11 @@
             }
         }
     }
+
+    // 전역 변수 등록
+    window.player = {};
+
+    window.player.injected = true;
+    window.player.start = replay;
+    window.player.stop = () => {};
 })();

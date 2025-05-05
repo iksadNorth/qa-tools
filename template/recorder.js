@@ -1,22 +1,29 @@
 (function() {
     var STORE_KEY = 'testtool_logs';
-    console.log('inject!');
+    console.log('recorder inject!');
 
-    if (!window.testToolLogs) {
-        window.testToolLogs = [];
+    function getMonitoring() {
+        if(window.MONITOR_FLAG === undefined) window.MONITOR_FLAG = true;
+        return window.MONITOR_FLAG;
+    }
+    function setMonitoring(flag) {
+        window.MONITOR_FLAG = flag;
     }
   
-    function saveLog(entry) {
-        window.testToolLogs.push(entry);
-        localStorage.setItem(STORE_KEY, JSON.stringify(window.testToolLogs));
-        console.log(entry);
-    }
-  
-    window.getLog = function() {
+    function getLog() {
         var logs = window.localStorage.getItem(STORE_KEY);
         window.localStorage.removeItem(STORE_KEY);
-        console.log(logs)
         return logs;
+    }
+    function saveLog(entry) {
+        if(!getMonitoring()) return;
+
+        var logs = window.localStorage.getItem(STORE_KEY) ?? '[]';
+        logs = JSON.parse(logs);
+        logs.push(entry);
+        localStorage.setItem(STORE_KEY, JSON.stringify(logs));
+
+        console.log(entry);
     }
   
     function cssPath(el) {
@@ -41,7 +48,7 @@
         return path.join(' > ');
     }
 
-    window.run = function() {
+    function monitor() {
         // navigate 로그
         if (!window.prevUrl) {
             saveLog({
@@ -67,5 +74,18 @@
             });
         }, true);
     }
+    monitor();
+
+    // 전역 변수 등록
+    window.recorder = {};
+    window.recorder.getLog = getLog;
+
+    window.recorder.injected = true;
+    window.recorder.start = () => {
+        setMonitoring(true);
+    };
+    window.recorder.stop = () => {
+        setMonitoring(false);
+    };
 })();
   
