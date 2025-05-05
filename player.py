@@ -1,8 +1,9 @@
 import time
 from jinja2 import Environment, FileSystemLoader
+from asyncio import sleep
+
 from src.driver_factory import SeleniumDriverFactory
 from src.json_handler import load_scenarios
-from asyncio import sleep
 from src.singleton import Singleton
 
 
@@ -39,17 +40,19 @@ class Player(Singleton):
             # 무분별한 주입여부 확인 방지
             await sleep(interval_sec)
 
-    def play(self, scenario: list, interval_sec=0.1):
+    def start(self, scenario: list, interval_sec=0.1):
         for action in scenario:
-            print((script := f"player.start({action})"))
-            self.send_command(script)
+            self.send_command(f"player?.start({action})")
             time.sleep(interval_sec)
+
+    def stop(self):
+        self.send_command("player?.stop()")
 
 
 if __name__ == "__main__":
     driver = SeleniumDriverFactory().get_driver()
-    logs = load_scenarios('scenarios/recorded_20250505124605.json')
+    logs = load_scenarios('scenarios/replay_test.json')
 
     player = Player(driver=driver)
-    player.play(logs, 0.3)
+    player.start(logs, 0.3)
     

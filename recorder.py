@@ -1,9 +1,10 @@
 import time
-from src.json_handler import save_scenarios
 import json
 from jinja2 import Environment, FileSystemLoader
-from src.driver_factory import SeleniumDriverFactory
 from asyncio import sleep
+
+from src.json_handler import save_scenarios
+from src.driver_factory import SeleniumDriverFactory
 from src.singleton import Singleton
 
 
@@ -41,10 +42,14 @@ class Recorder(Singleton):
 
             # 무분별한 주입여부 확인 방지
             await sleep(interval_sec)
+    
+    def start(self) -> None:
+        return self.send_command("return recorder?.start();")
+    
+    def stop(self) -> None:
+        return self.send_command("return recorder?.stop();")
 
-    def collect_logs(self) -> str:
-        """브라우저에서 로그 수집. 프로세스 종료 시, 무조건 호출되어야 함.
-        """
+    def getLog(self) -> str:
         try:
             logs = self.send_command("return recorder.getLog();")
             if not logs: raise RuntimeError
@@ -58,13 +63,13 @@ class Recorder(Singleton):
         total_logs = []
         try:
             while self.health_check():
-                if (logs := self.collect_logs()):
+                if (logs := self.getLog()):
                     total_logs.extend(logs)
                 else:
                     time.sleep(interval_sec)
             raise RuntimeError
         except Exception:
-            total_logs.extend(self.collect_logs())
+            total_logs.extend(self.getLog())
         return total_logs
 
 

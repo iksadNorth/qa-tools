@@ -1,1 +1,2 @@
 *.json
+!replay_test.json

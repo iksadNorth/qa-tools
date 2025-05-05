@@ -1,0 +1,117 @@
+{
+  "scenario": [
+    {
+      "type": "navigate",
+      "to": "https://www.naver.com/"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "t"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "te"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "tes"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "test"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "tes"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "te"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "t"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": ""
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "ㅅ"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "사"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "살"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "사"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "사라"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "사람"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "사람"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "사람ㅁ"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "사람모"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "사람몽"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "사람모"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "사람모야"
+    },
+    {
+      "type": "input",
+      "selector": "input#query",
+      "value": "사람모양"
+    },
+    {
+      "type": "navigate",
+      "to": "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EC%82%AC%EB%9E%8C%EB%AA%A8%EC%96%91&ackey=zo6s9qyv"
+    }
+  ]
+}

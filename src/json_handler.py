@@ -14,6 +14,10 @@ def load_scenarios(filepath: str):
     content = load_json(filepath)
     return content.get("scenario", [])
 
-def save_scenarios(logs: list):
+def save_scenarios(logs: list, scenario_name: str = None):
     created_at = datetime.now().strftime("%Y%m%d%H%M%S")
-    save_json(f'scenarios/recorded_{created_at}.json', {"scenario": logs})
+    if scenario_name:
+        filepath = f'scenarios/{scenario_name}.json'
+    else:
+        filepath = f'scenarios/recorded_{created_at}.json'
+    save_json(filepath, {"scenario": logs})

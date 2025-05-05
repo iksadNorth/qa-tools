@@ -3,7 +3,7 @@
     console.log('recorder inject!');
 
     function getMonitoring() {
-        if(window.MONITOR_FLAG === undefined) window.MONITOR_FLAG = true;
+        if(window.MONITOR_FLAG === undefined) window.MONITOR_FLAG = false;
         return window.MONITOR_FLAG;
     }
     function setMonitoring(flag) {
