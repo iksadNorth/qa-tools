@@ -34,7 +34,7 @@ if __name__ == "__main__":
     from src.config import CONFIG
 
     driver = SeleniumDriverFactory().get_driver()
-    logs = load_scenarios('scenarios/replay_test.json')
+    logs = load_scenarios('replay_test')
 
     player = Player(driver=driver)
     player.start(logs, 0.3)

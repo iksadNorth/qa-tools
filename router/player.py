@@ -10,7 +10,7 @@ router = APIRouter()
 async def start(scenario_name: str):
     player = Player()
 
-    logs = load_scenarios(f'scenarios/{scenario_name}.json')
+    logs = load_scenarios(scenario_name)
     player.start(logs, 0.3)
     return {"scenario_name": scenario_name, 'subject': 'player', 'status': 'start'}
 
