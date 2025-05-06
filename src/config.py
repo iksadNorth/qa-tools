@@ -74,5 +74,6 @@ CONFIG = Config()
 if __name__ == "__main__":
     print(CONFIG.get('APP'))
     print(CONFIG.get('APP.CORS'))
+    print(CONFIG.get('APP.SELENIUM.HEADLESS'))
     print(CONFIG.get('APP.XXX', []))
     print(CONFIG.get('APP.XXX'))

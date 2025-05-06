@@ -7,3 +7,4 @@ APP:
     ROOTDIR: template
   SELENIUM:
     INIT_URL: "https://www.naver.com"
+    HEADLESS: false

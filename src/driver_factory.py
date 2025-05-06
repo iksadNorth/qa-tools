@@ -2,12 +2,13 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium_stealth import stealth
 from src.singleton import Singleton
+from src.config import CONFIG
 
 class SeleniumDriverFactory(Singleton):    
-    def _init_once(self, headless: bool = False):
-        self.driver = self.init_driver(headless=headless)
+    def _init_once(self):
+        self.driver = self.init_driver()
     
-    def init_driver(self, headless):
+    def init_driver(self):
         options = Options()
 
         options.add_argument(
@@ -19,7 +20,7 @@ class SeleniumDriverFactory(Singleton):
         options.add_experimental_option("excludeSwitches", ["enable-automation"])
         options.add_experimental_option("useAutomationExtension", False)
 
-        if headless:
+        if CONFIG.get('APP.SELENIUM.HEADLESS'):
             options.add_argument("--headless=new")
 
         options.add_argument("--disable-blink-features=AutomationControlled")
