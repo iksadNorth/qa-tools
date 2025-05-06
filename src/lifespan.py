@@ -5,12 +5,13 @@ import asyncio
 from src.driver_factory import SeleniumDriverFactory
 from js_bridge.recorder import Recorder
 from js_bridge.player import Player
+from src.config import CONFIG
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     driver = SeleniumDriverFactory().get_driver()
-    driver.get('https://www.naver.com/')
+    driver.get(CONFIG.get('APP.SELENIUM.INIT_URL'))
     recorder = Recorder(driver=driver)
     player = Player(driver=driver)
 

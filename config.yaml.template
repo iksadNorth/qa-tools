@@ -1,0 +1,9 @@
+APP:
+  CORS:
+    ORIGINS:
+      - "http://localhost"
+      - "https://www.naver.com"
+  JS:
+    ROOTDIR: template
+  SELENIUM:
+    INIT_URL: "https://www.naver.com"

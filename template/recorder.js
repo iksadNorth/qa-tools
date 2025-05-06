@@ -92,6 +92,10 @@
     window.recorder.injected = true;
     window.recorder.start = () => {
         setMonitoring(true);
+        saveLog({
+            type: 'navigate',
+            to: (window.prevUrl = window.location.href),
+        });
     };
     window.recorder.stop = () => {
         setMonitoring(false);

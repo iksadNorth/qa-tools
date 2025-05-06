@@ -6,14 +6,13 @@ from asyncio import sleep
 from src.json_handler import save_scenarios
 from src.driver_factory import SeleniumDriverFactory
 from src.singleton import Singleton
+from src.config import CONFIG
 
 
 class Recorder(Singleton):
-    STORE_KEY = 'testtool_logs'
-    
     def _init_once(self, driver=None):
         self.driver = driver or SeleniumDriverFactory().get_driver()
-        self.env = Environment(loader=FileSystemLoader('template'))
+        self.env = Environment(loader=FileSystemLoader(CONFIG.get('APP.JS.ROOTDIR')))
     
     def inject_js(self) -> None:
         """로그 코드 주입.
@@ -75,7 +74,7 @@ class Recorder(Singleton):
 
 if __name__ == "__main__":
     driver = SeleniumDriverFactory().get_driver()
-    driver.get('https://www.naver.com/')
+    driver.get(CONFIG.get('APP.SELENIUM.INIT_URL'))
 
     recorder = Recorder(driver=driver)
     all_logs = recorder.save_logs_periodically(1)

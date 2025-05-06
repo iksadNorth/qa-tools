@@ -7,9 +7,10 @@ router = APIRouter()
 
 
 @router.get('/{scenario_name}/start')
-async def start(scenario_name: str):
+async def start(scenario_name: str, url: str = None):
     recorder = Recorder()
     recorder.start()
+    if url: recorder.driver.get(url)
     return {"scenario_name": scenario_name, 'subject': 'recorder', 'status': 'start'}
 
 @router.get('/{scenario_name}/stop')

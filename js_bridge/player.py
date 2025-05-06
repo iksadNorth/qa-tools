@@ -5,12 +5,13 @@ from asyncio import sleep
 from src.driver_factory import SeleniumDriverFactory
 from src.json_handler import load_scenarios
 from src.singleton import Singleton
+from src.config import CONFIG
 
 
 class Player(Singleton):
     def _init_once(self, driver=None):
         self.driver = driver or SeleniumDriverFactory().get_driver()
-        self.env = Environment(loader=FileSystemLoader('template'))
+        self.env = Environment(loader=FileSystemLoader(CONFIG.get('APP.JS.ROOTDIR')))
 
     def inject_js(self) -> None:
         """로그 코드 주입.
