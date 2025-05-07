@@ -34,23 +34,23 @@
     function cssPath(el) {
         if (!(el instanceof Element)) return '';
         const path = [];
-        while (el.nodeType === Node.ELEMENT_NODE) {
+        while (el && el.nodeType === Node.ELEMENT_NODE) {
             let selector = el.nodeName.toLowerCase();
-            if (el.id) {
-                // id에 특수문자(예: '.')가 있으면 속성 선택자 방식 사용
-                const safeId = /^[a-zA-Z_][\w-]*$/.test(el.id)
-                    ? `#${el.id}`
-                    : `[id="${el.id}"]`;
-                selector += safeId;
+
+            if (selector === 'body') {
                 path.unshift(selector);
-                break; // ID 기준으로 유니크하므로 중단
-            } else {
-                let sib = el, nth = 1;
-                while ((sib = sib.previousElementSibling)) {
-                    if (sib.nodeName.toLowerCase() === selector) nth++;
-                }
-                selector += `:nth-of-type(${nth})`;
+                break;
+            } else if (el.id && typeof el.id === 'string' && el.id.trim() !== '') {
+                selector += `[id="${el.id}"]`;
+                path.unshift(selector);
+                break;
             }
+
+            let sib = el, nth = 1;
+            while ((sib = sib.previousElementSibling)) {
+                if (sib.nodeName.toLowerCase() === selector) nth++;
+            }
+            selector += `:nth-of-type(${nth})`;
             path.unshift(selector);
             el = el.parentNode;
         }
