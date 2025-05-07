@@ -8,3 +8,5 @@ APP:
   SELENIUM:
     INIT_URL: "https://www.naver.com"
     HEADLESS: false
+  SCENARIO: 
+    ROOTDIR: 'scenarios'
