@@ -1,6 +1,39 @@
 (function() {
     console.log('player inject!');
 
+    // 쿠키 유틸 함수들
+    function setCookie(name, value, options = {}) {
+        options = {
+            path: '/',
+            'max-age': 3600, // 기본 1시간
+            ...options
+        };
+
+        let updatedCookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
+        for (let [key, val] of Object.entries(options)) {
+            updatedCookie += `; ${key}`;
+            if (val !== true) {
+                updatedCookie += `=${val}`;
+            }
+        }
+
+        document.cookie = updatedCookie;
+    }
+
+    function getCookie(name) {
+        const matches = document.cookie.match(
+            new RegExp(`(?:^|; )${encodeURIComponent(name)}=([^;]*)`)
+        );
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    function deleteCookie(name, options = {}) {
+        setCookie(name, '', {
+            ...options,
+            'max-age': 0
+        });
+    }
+
     function waitForElementAsync(selector) {
         return new Promise(resolve => {
             const existing = document.querySelector(selector);
@@ -47,5 +80,8 @@
 
     window.player.injected = true;
     window.player.start = replay;
+    window.player.setCookie = setCookie;
+    window.player.getCookie = getCookie;
+    window.player.deleteCookie = deleteCookie;
     window.player.stop = () => {};
 })();
