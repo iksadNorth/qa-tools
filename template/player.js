@@ -79,9 +79,17 @@
     window.player = {};
 
     window.player.injected = true;
-    window.player.start = replay;
     window.player.setCookie = setCookie;
     window.player.getCookie = getCookie;
     window.player.deleteCookie = deleteCookie;
-    window.player.stop = () => {};
+
+    window.player.start = (log, scenarioName) => {
+        setCookie('X-PLAY-ID', crypto.randomUUID());
+        setCookie('X-SCENARIO-ID', scenarioName ?? '');
+        replay(log);
+    };
+    window.player.stop = () => {
+        deleteCookie('X-PLAY-ID');
+        deleteCookie('X-SCENARIO-ID');
+    };
 })();

@@ -19,9 +19,9 @@ class Player(Singleton, BaseJsBridge):
             driver=driver
         )
 
-    def start(self, scenario: list, interval_sec=0.1):
+    def start(self, scenario_name: str, scenario: list, interval_sec=0.1):
         for action in scenario:
-            self.send_command(f"player?.start({action})")
+            self.send_command(f"player?.start({action}, '{scenario_name}')")
             time.sleep(interval_sec)
 
     def stop(self):
@@ -37,5 +37,5 @@ if __name__ == "__main__":
     logs = load_scenarios('replay_test')
 
     player = Player(driver=driver)
-    player.start(logs, 0.3)
+    player.start('replay_test', logs, 0.3)
     
