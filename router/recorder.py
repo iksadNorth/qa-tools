@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from js_bridge.recorder import Recorder
 from src.json_handler import save_scenarios
+from uuid import uuid4
 
 
 router = APIRouter()
@@ -18,6 +19,10 @@ async def stop(scenario_name: str):
     recorder = Recorder()
 
     logs = recorder.getLog()
+    for idx, log in enumerate(logs):
+        logs[idx] = log | {
+            'step_id': str(uuid4()),
+        }
     save_scenarios(logs, scenario_name)
 
     recorder.stop()

@@ -84,8 +84,8 @@
     window.player.deleteCookie = deleteCookie;
 
     window.player.start = (log, scenarioName, playId) => {
-        setCookie('X-PLAY-ID', playId);
-        setCookie('X-SCENARIO-ID', scenarioName ?? '');
+        if (playId) setCookie('X-PLAY-ID', playId);
+        if (scenarioName) setCookie('X-SCENARIO-ID', scenarioName);
         replay(log);
     };
     window.player.stop = () => {

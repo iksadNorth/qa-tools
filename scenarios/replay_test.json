@@ -2,116 +2,139 @@
   "scenario": [
     {
       "type": "navigate",
-      "to": "https://www.naver.com/"
+      "to": "https://www.naver.com/",
+      "step_id": "7dcea33b-21e6-412f-a86e-b152702885a1"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "t"
+      "selector": "input[id=\"query\"]",
+      "value": "t",
+      "step_id": "fbfe1524-5f2f-4db7-aa60-81cdf374249e"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "te"
+      "selector": "input[id=\"query\"]",
+      "value": "te",
+      "step_id": "366e14d8-7884-415b-ab08-233f6d67dd47"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "tes"
+      "selector": "input[id=\"query\"]",
+      "value": "tes",
+      "step_id": "12b7b259-cd4b-43e6-962d-f85b2ca234ed"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "test"
+      "selector": "input[id=\"query\"]",
+      "value": "test",
+      "step_id": "9084611f-0ee1-420c-bc2b-939b5d6c99d9"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "tes"
+      "selector": "input[id=\"query\"]",
+      "value": "tes",
+      "step_id": "824e7820-2239-4fdd-90fa-13286cbd0238"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "te"
+      "selector": "input[id=\"query\"]",
+      "value": "te",
+      "step_id": "e182b09b-14da-4b14-8736-c238f63070e2"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "t"
+      "selector": "input[id=\"query\"]",
+      "value": "t",
+      "step_id": "c9ceccf3-1c87-44eb-add4-3169f8373e51"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": ""
+      "selector": "input[id=\"query\"]",
+      "value": "",
+      "step_id": "2dde6fe6-3cdb-48f3-933b-b8a620d8931b"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "ㅅ"
+      "selector": "input[id=\"query\"]",
+      "value": "ㅅ",
+      "step_id": "b0a69814-df9b-4dd3-aa18-24eb6d738196"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "사"
+      "selector": "input[id=\"query\"]",
+      "value": "사",
+      "step_id": "57bc3f8a-d9a2-4ea7-be3c-76e11e890b47"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "살"
+      "selector": "input[id=\"query\"]",
+      "value": "살",
+      "step_id": "cf54e17d-3a76-4361-8c00-6122b0f3dc07"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "사"
+      "selector": "input[id=\"query\"]",
+      "value": "사",
+      "step_id": "2bf2b0bf-2443-41e1-8949-edb2a4573c4d"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "사라"
+      "selector": "input[id=\"query\"]",
+      "value": "사라",
+      "step_id": "bfc2c8e3-abf1-4de6-8fc2-1b11a4d522f8"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "사람"
+      "selector": "input[id=\"query\"]",
+      "value": "사람",
+      "step_id": "5f8408d2-9cd4-4b8c-8f56-41d8a5fc5277"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "사람"
+      "selector": "input[id=\"query\"]",
+      "value": "사람",
+      "step_id": "4813c18c-7524-4df6-bfac-68ecfd2835c8"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "사람ㅁ"
+      "selector": "input[id=\"query\"]",
+      "value": "사람ㅁ",
+      "step_id": "19e8e217-7d78-460f-a03e-fe9d4fe75bb0"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "사람모"
+      "selector": "input[id=\"query\"]",
+      "value": "사람모",
+      "step_id": "231f294e-77a8-447a-8947-b2ae679a65bd"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "사람몽"
+      "selector": "input[id=\"query\"]",
+      "value": "사람몽",
+      "step_id": "c3793566-339c-4765-93ed-6080441754f0"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "사람모"
+      "selector": "input[id=\"query\"]",
+      "value": "사람모",
+      "step_id": "2ff4bb29-3931-4068-a9e2-f7d61a549ee3"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "사람모야"
+      "selector": "input[id=\"query\"]",
+      "value": "사람모야",
+      "step_id": "1b4b2ffe-0974-4b12-82ab-e9c623b3510b"
     },
     {
       "type": "input",
-      "selector": "input#query",
-      "value": "사람모양"
+      "selector": "input[id=\"query\"]",
+      "value": "사람모양",
+      "step_id": "4050d2eb-8e4e-4474-937b-1fcebc565a90"
     },
     {
       "type": "navigate",
-      "to": "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EC%82%AC%EB%9E%8C%EB%AA%A8%EC%96%91&ackey=zo6s9qyv"
+      "to": "https://www.naver.com/",
+      "step_id": "d8bf37d2-316f-4b0c-b410-b74dfd386f30"
     }
   ]
 }
