@@ -3,8 +3,8 @@ from contextlib import asynccontextmanager
 import asyncio
 
 from src.driver_factory import SeleniumDriverFactory
-from js_bridge.recorder import Recorder
-from js_bridge.player import Player
+from src.js_bridge.recorder import Recorder
+from src.js_bridge.player import Player
 from src.config import CONFIG
 
 

@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from js_bridge.player import Player
+from src.js_bridge.player import Player
 from src.json_handler import load_scenarios
 
 import time

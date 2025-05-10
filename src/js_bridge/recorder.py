@@ -2,7 +2,7 @@ import time
 import json
 
 from src.singleton import Singleton
-from js_bridge.bridge import BaseJsBridge
+from src.js_bridge.bridge import BaseJsBridge
 
 
 class Recorder(Singleton, BaseJsBridge):

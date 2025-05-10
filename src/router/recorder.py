@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from js_bridge.recorder import Recorder
+from src.js_bridge.recorder import Recorder
 from src.json_handler import save_scenarios
 from uuid import uuid4
 

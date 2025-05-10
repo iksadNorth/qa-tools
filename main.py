@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from router import player, recorder, controller
+from src.router import player, recorder, controller
 from src.lifespan import lifespan
-from middlewares.cors import add_cors_middleware
+from src.middlewares.cors import add_cors_middleware
 
 
 app = FastAPI(lifespan=lifespan)

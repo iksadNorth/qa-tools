@@ -1,6 +1,6 @@
 
 from src.singleton import Singleton
-from js_bridge.bridge import BaseJsBridge
+from src.js_bridge.bridge import BaseJsBridge
 
 
 class Player(Singleton, BaseJsBridge):
