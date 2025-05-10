@@ -83,8 +83,8 @@
     window.player.getCookie = getCookie;
     window.player.deleteCookie = deleteCookie;
 
-    window.player.start = (log, scenarioName) => {
-        setCookie('X-PLAY-ID', crypto.randomUUID());
+    window.player.start = (log, scenarioName, playId) => {
+        setCookie('X-PLAY-ID', playId);
         setCookie('X-SCENARIO-ID', scenarioName ?? '');
         replay(log);
     };

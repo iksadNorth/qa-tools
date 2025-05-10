@@ -2,6 +2,7 @@ import time
 
 from src.singleton import Singleton
 from js_bridge.bridge import BaseJsBridge
+from uuid import uuid4
 
 
 class Player(Singleton, BaseJsBridge):
@@ -20,9 +21,11 @@ class Player(Singleton, BaseJsBridge):
         )
 
     def start(self, scenario_name: str, scenario: list, interval_sec=0.1):
+        play_id = str(uuid4())
         for action in scenario:
-            self.send_command(f"player?.start({action}, '{scenario_name}')")
+            self.send_command(f"player?.start({action}, '{scenario_name}', '{play_id}')")
             time.sleep(interval_sec)
+        self.send_command("player?.stop()")
 
     def stop(self):
         self.send_command("player?.stop()")
