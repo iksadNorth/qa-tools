@@ -1,69 +1,126 @@
-<style>
-    #controller {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 12px 20px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        z-index: 9999;
-    }
-    #scenario-name {
-        padding: 6px 10px;
-        border-radius: 6px;
-        border: none;
-        width: 200px;
-    }
-    #play-btn {
-        padding: 6px 10px;
-        border: none;
-        border-radius: 6px;
-        background-color: white;
-        cursor: pointer;
-    }
-    #pause-btn {
-        padding: 6px 10px;
-        border: none;
-        border-radius: 6px;
-        background-color: white;
-        cursor: pointer;
-    }
-    #record-btn {
-        padding: 6px 10px;
-        border: none;
-        border-radius: 6px;
-        background-color: red;
-        color: white;
-        cursor: pointer;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controller</title>
+    <style>
+        #controller {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 12px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+        }
+        .form-input {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: none;
+            width: 200px;
+        }
+        .btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: white;
+            cursor: pointer;
+            height: 35px; width: 35px;
+        }
+        #record-btn {
+            background-color: red;
+            color: white;
+        }
+        .container {
+            display: grid;
+            row-gap: 10px;
+            grid-template-columns: 100px 1fr;
+        }
+        .flex-align {
+            display: flex;
+            justify-content: space-between;
+        }
+        :root {
+            font-family: "Jua", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="controller">
+        <div class="container">
+            <div>&nbsp;</div>
+            <div class="flex-align">
+                <button id="play-unit-btn" class="btn">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+                <button id="play-btn" class="btn">
+                    <i class="fa-solid fa-forward"></i>
+                </button>
+                <button id="record-btn" class="btn">
+                    <i class="fa-solid fa-video"></i>
+                </button>
+                <button id="pause-btn" class="btn">
+                    <i class="fa-solid fa-pause"></i>
+                </button>
+            </div>
+            <span>시나리오명</span>
+            <input type="text" id="scenario-name" name="scenario-name" class="form-input" placeholder="시나리오명 입력">
+            <span>시작점</span>
+            <input type="text" id="step-id" name="step-id" class="form-input" placeholder="시작점 입력">
+        </div>
+    </div>
 
-<div id="controller">
-    <input type="text" id="scenario-name" name="scenario-name" placeholder="시나리오명 입력">
-    <button id="play-btn">▶️</button>
-    <button id="record-btn">●</button>
-    <button id="pause-btn">⏸️</button>
-</div>
+    <script>
+        $(function() {
+            // 이벤트 바인딩
+            $('#play-unit-btn').on('click', () => {
+                const scenarioName = $('#scenario-name').val();
+                const cursor = $('#step-id').val();
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(function() {
-        // 이벤트 바인딩
-        $('#play-btn').on('click', () => {
-            const scenarioName = $('#scenario-name').val();
-            fetch(`/api/v1/player/${scenarioName}/start`);
+                if (!scenarioName) return;
+
+                fetch(`/api/v1/player/${scenarioName}/step?cursor=${cursor}`)
+                .then((res) => res.json())
+                .then((res) => {
+                    const next_cursor = res?.cursor ?? '';
+                    $('#step-id').val(next_cursor);
+                });
+            });
+            $('#play-btn').on('click', () => {
+                const scenarioName = $('#scenario-name').val();
+                const cursor = $('#step-id').val();
+
+                if (!scenarioName) return;
+
+                fetch(`/api/v1/player/${scenarioName}/start?cursor=${cursor}`);
+            });
+            $('#record-btn').on('click', () => {
+                const scenarioName = $('#scenario-name').val();
+
+                if (!scenarioName) return;
+
+                fetch(`/api/v1/recorder/${scenarioName}/start`);
+            });
+            $('#pause-btn').on('click', () => {
+                const scenarioName = $('#scenario-name').val();
+
+                if (!scenarioName) return;
+
+                fetch(`/api/v1/recorder/${scenarioName}/stop`);
+            });
         });
-        $('#record-btn').on('click', () => {
-            const scenarioName = $('#scenario-name').val();
-            fetch(`/api/v1/recorder/${scenarioName}/start`);
-        });
-        $('#pause-btn').on('click', () => {
-            const scenarioName = $('#scenario-name').val();
-            fetch(`/api/v1/recorder/${scenarioName}/stop`);
-        });
-    });
-</script>
+    </script>
+</body>
+</html>
