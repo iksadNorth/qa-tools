@@ -3,6 +3,7 @@ from typing import Any
 from datetime import datetime
 import os
 import platform
+from pathlib import Path
 from src.config import CONFIG
 
 
@@ -46,3 +47,15 @@ def load_scenarios(scenario_name: str):
 def save_scenarios(logs: list, scenario_name: str = None):
     filepath = get_scenario_path(scenario_name)
     save_json(filepath, {"scenario": logs})
+
+def load_array_scenarios():
+    """존재는 시나리오 목록 출력
+    """
+    ensure_dir_exists(SCENARIO_DIR)
+    
+    def get_name(items: str):
+        items = str(items)
+        _, _, name = items.partition('/')
+        name, _, _ = name.partition('.')
+        return name
+    yield from map(get_name, Path(SCENARIO_DIR).rglob('*.json'))

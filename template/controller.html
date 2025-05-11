@@ -17,12 +17,12 @@
             align-items: center;
             gap: 10px;
             z-index: 9999;
+            width: 400px;
         }
         .form-input {
             padding: 6px 10px;
             border-radius: 6px;
             border: none;
-            width: 200px;
         }
         .btn {
             padding: 6px 10px;
@@ -40,6 +40,7 @@
             display: grid;
             row-gap: 10px;
             grid-template-columns: 100px 1fr;
+            width: 100%;
         }
         .flex-align {
             display: flex;
@@ -49,6 +50,30 @@
             font-family: "Jua", sans-serif;
             font-weight: 400;
             font-style: normal;
+        }
+        ul.styled-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow-y: scroll;
+            max-height: 200px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        ul.styled-list li {
+            padding: 6px 10px;
+            border-bottom: 1px solid #eee;
+            background-color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+        ul.styled-list li:last-child {
+            border-bottom: none;
+        }
+        ul.styled-list li:hover {
+            background-color: #f0f4ff;
+            color: #1a73e8;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -79,12 +104,32 @@
             <input type="text" id="scenario-name" name="scenario-name" class="form-input" placeholder="시나리오명 입력">
             <span>시작점</span>
             <input type="text" id="step-id" name="step-id" class="form-input" placeholder="시작점 입력">
+            <span>시나리오 목록</span>
+            <ul id="scenarios-list" class="styled-list">
+                <script type="text/template" id="scenarios-item-template">
+                    <li class="scenario-item">[[item]]</li>
+                </script>
+            </ul>
         </div>
     </div>
 
     <script>
         $(function() {
             // 이벤트 바인딩
+            const loadScenarios = async () => {
+                let promise = await fetch(`/api/v1/scenarios`);
+                promise = await promise.json()
+                promise.scenarios.map(item => {
+                    const template = $('#scenarios-item-template').html().replace('[[item]]', item);
+                    $('#scenarios-list').append(template);
+                });
+                $('.scenario-item').on('click', (event) => {
+                    const scenarioName = $(event.target).text().trim();
+                    $('#scenario-name').val(scenarioName);
+                });
+            };
+            loadScenarios();
+
             $('#play-unit-btn').on('click', () => {
                 const scenarioName = $('#scenario-name').val();
                 const cursor = $('#step-id').val();
